@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use Binance\API;
+use ccxt\binance;
 use Illuminate\Console\Command;
 
 class Copy extends Command
@@ -37,6 +39,12 @@ class Copy extends Command
      */
     public function handle()
     {
+        $parent = new binance([
+           "apiKey" => env("PARENT_KEY"), "secret" => env("PARENT_SECRET"),
+        ]);
+        $parent->load_time_difference();
+
+        $parent->load_markets();
 
     }
 }
